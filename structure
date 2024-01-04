@@ -1,0 +1,11 @@
+project/
+├── controllers/
+│   └── database_controller.py
+├── models/
+│   ├── telegram_bot_model.py
+│   ├── user.py
+│   ├── statistics.py
+│   └── database.py
+├── views/
+│   └── bot_view.py
+└── main.py

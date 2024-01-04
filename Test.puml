@@ -1,0 +1,62 @@
+@startuml
+
+class User {
+    + name : str
+    + chat_id : int
+    + today_points : int
+    + total_points : int
+    + today_requests : int
+    + total_requests : int
+    + meloman_count : int
+    + __init__(name: str, chat_id: int) : void
+}
+
+class Statistics {
+    + total_users : int
+    + active_users : int
+    + daily_selection_user : User
+    + __init__() : void
+}
+
+class Database {
+    + __init__(db_name: str) : void
+    + create_table() : void
+    + add_user(user: User) : void
+    + delete_user(user_id: int) : void
+    + get_all_users() : List[User]
+    + close() : void
+}
+
+class BotController {
+    - users : List[User]
+    - statistics : Statistics
+    - database_controller : DatabaseController
+    + __init__() : void
+    + add_user(name: str, chat_id: int) : User
+    + authorize_user(user: User) : void
+    + create_random_selection() : void
+    + get_statistics() : Statistics
+    + delete_user(user_id: int) : void
+}
+
+class BotView {
+    - users_list : BoxLayout
+    - start_button : Button
+    + __init__() : void
+    + update_users_list() : void
+    + display_error_message(message: str) : void
+    + delete_user(user_id: int) : void
+}
+
+BotController ..> User
+BotController ..> Statistics
+BotController ..> DatabaseController
+BotController --> BotView
+BotView ..> User
+BotView ..> BoxLayout
+BotView ..> Button
+DatabaseController ..> Database
+DatabaseController ..> User
+DatabaseController ..> Statistics
+
+@enduml
